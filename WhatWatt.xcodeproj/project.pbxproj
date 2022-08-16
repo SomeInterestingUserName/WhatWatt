@@ -14,6 +14,7 @@
 		4EC9C9F928AB256E009B813B /* WhatWattTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9C9F828AB256E009B813B /* WhatWattTests.swift */; };
 		4EC9CA0328AB256E009B813B /* WhatWattUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9CA0228AB256E009B813B /* WhatWattUITests.swift */; };
 		4EC9CA0528AB256E009B813B /* WhatWattUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9CA0428AB256E009B813B /* WhatWattUITestsLaunchTests.swift */; };
+		4EC9CA1328AB25E9009B813B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC9CA1228AB25E9009B813B /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		4EC9C9FE28AB256E009B813B /* WhatWattUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatWattUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC9CA0228AB256E009B813B /* WhatWattUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatWattUITests.swift; sourceTree = "<group>"; };
 		4EC9CA0428AB256E009B813B /* WhatWattUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatWattUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4EC9CA1128AB257C009B813B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4EC9CA1228AB25E9009B813B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +98,13 @@
 		4EC9C9E528AB256D009B813B /* WhatWatt */ = {
 			isa = PBXGroup;
 			children = (
+				4EC9CA1128AB257C009B813B /* Info.plist */,
 				4EC9C9E628AB256D009B813B /* AppDelegate.swift */,
 				4EC9C9E828AB256D009B813B /* ViewController.swift */,
 				4EC9C9EA28AB256E009B813B /* Assets.xcassets */,
 				4EC9C9EC28AB256E009B813B /* Main.storyboard */,
 				4EC9C9EF28AB256E009B813B /* WhatWatt.entitlements */,
+				4EC9CA1228AB25E9009B813B /* main.swift */,
 			);
 			path = WhatWatt;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 			files = (
 				4EC9C9E928AB256D009B813B /* ViewController.swift in Sources */,
 				4EC9C9E728AB256D009B813B /* AppDelegate.swift in Sources */,
+				4EC9CA1328AB25E9009B813B /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,8 +431,8 @@
 				DEVELOPMENT_TEAM = XCRR2AC646;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WhatWatt/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -452,8 +458,8 @@
 				DEVELOPMENT_TEAM = XCRR2AC646;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WhatWatt/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
