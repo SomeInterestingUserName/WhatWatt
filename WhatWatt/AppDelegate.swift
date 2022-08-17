@@ -5,7 +5,7 @@
 //  Created by Jiawei Chen on 8/15/22.
 //
 
-// Thanks:  https://sarunw.com/posts/how-to-make-macos-menu-bar-app/
+
 
 import Cocoa
 import IOKit.ps
@@ -13,71 +13,48 @@ import IOKit.ps
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var statusItem: NSStatusItem!
-    private var count: Int = 0
-    private var timer: Timer?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Thanks  https://sarunw.com/posts/how-to-make-macos-menu-bar-app/
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        /*if let button = statusItem.button{
-            button.image = NSImage(systemSymbolName: "1.circle", accessibilityDescription: "1")
-        }*/
         let menu = NSMenu()
         menu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         statusItem.menu = menu
-        //statusItem.button?.title="Hello!"
         
-        
-        /*
-        // Check for power every 5s
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){timer in
-            debugPrint("Timer")
-        }*/
+        // Saves a pointer to this specific instance of AppDelegate, so we can call its member functions in a run loop handler
         // Thanks https://stackoverflow.com/questions/38057615/create-a-cfrunloopsourceref-using-iopsnotificationcreaterunloopsource-in-swift and https://stackoverflow.com/questions/50774391/swift-4-getting-thread-1-exc-bad-access-error-with-avfoundation
         let context = UnsafeMutableRawPointer(Unmanaged.passRetained(self).toOpaque())
-        let loop: CFRunLoopSource = IOPSNotificationCreateRunLoopSource({(context:UnsafeMutableRawPointer?) in
-            if context != nil{
-                let opaque = Unmanaged<AppDelegate>.fromOpaque(context!)
-                let _self = opaque.takeUnretainedValue()
-                
+        // Create an async event listener for power source change events (e.g. plugging or unplugging the charger)
+        let loop: CFRunLoopSource = IOPSNotificationCreateRunLoopSource(
+            // Updates power
+            {(context:UnsafeMutableRawPointer?) in
+                let _self = Unmanaged<AppDelegate>.fromOpaque(context!).takeUnretainedValue()
                 _self.powerSourceDidChange()
-                }
-                //
-                //
-            
-            
-            /*if
-                _self.powerSourceDidChange()
-            }*/
-            
-            
-        }, context).takeRetainedValue() as CFRunLoopSource
-        CFRunLoopAddSource(CFRunLoopGetCurrent(), loop, CFRunLoopMode.defaultMode)
-        powerSourceDidChange()
+            }, context).takeRetainedValue() as CFRunLoopSource
         
+        // Registers the listener
+        CFRunLoopAddSource(CFRunLoopGetCurrent(), loop, CFRunLoopMode.defaultMode)
+        
+        // Updates the menu bar for the first time
+        powerSourceDidChange()
     }
     
-    
+    // Event handler for power source change
     func powerSourceDidChange(){
         let unmanagedDict:Unmanaged<CFDictionary>? = IOPSCopyExternalPowerAdapterDetails()
-        
-
-        // Thanks https://stackoverflow.com/questions/59458981/cfdictionarygetvalue-throws-exc-bad-access
         var watts = 0
+        // Converts the CFDict into a Swift dict so we don't get nasty null pointer errors
+        // Thanks https://stackoverflow.com/questions/59458981/cfdictionarygetvalue-throws-exc-bad-access
         if let dict = unmanagedDict?.takeRetainedValue() as? [String:Any]{
+            // This might fail so it's all optional (e.g. watts isn't available when there's no charger present
             if let maybeWatts = dict[kIOPSPowerAdapterWattsKey] as? Int{
                 watts = maybeWatts
             }
         }
-        if watts != 0{
-            statusItem.button?.title=String(format:"%d W", watts)
-        }
-        else{
-            statusItem.button?.title=""
-        }
+        statusItem.button?.title=String(format:"%d W", watts)
     }
 
     func applicationWillTerminate(_ notification: Notification) {
-        //timer?.invalidate()
     }
 }
 
