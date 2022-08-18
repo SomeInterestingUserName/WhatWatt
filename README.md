@@ -3,3 +3,6 @@ USB-C charging can be shrouded in mystery, especially when you have an unfamilia
 
 ## Compatibility
 This app is compatible with Intel and Apple Silicon portable Macs running **macOS 10.13 "High Sierra"** or newer. Although intended for Macs that charge via USB-C/MagSafe 3, this app also partially supports older MagSafe 1 and 2 Macs (though you might not see current/voltage information)
+
+## Installation
+Hop on over to the [Releases](https://github.com/SomeInterestingUserName/WhatWatt/releases) to grab your copy of WhatWatt! I'm not enrolled in the Apple Developer Program, so your computer might not trust me. If it refuses to open the app, just right-click and select "Open" from the menu.
